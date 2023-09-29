@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wilson Slides Creator</title>
+
+    <script src="node_modules/latex.js/dist/latex.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+    <div class="container" style="margin-top: 10%;">
+        <div class="row">
+            <div class="col s12 col l3"></div>
+            <div class="col s12 col l6" style="border: 1px solid gray; padding: 20px">
+                <h5>
+                    Apresentação
+                </h5>
+                <br></br>
+                <div class="input-field">
+                    <input id="full_name" type="text" class="validate">
+                    <label for="full_name">Nome Completo</label>
+                </div>
+                <div class="input-field">
+                    <input id="presentation_title" type="text" class="validate">
+                    <label for="presentation_title">Título da Apresentação</label>
+                </div>
+                <div class="input-field">
+                    <input id="presentation_subtitle" type="text" maxlength="30" class="validate">
+                    <label for="presentation_subtitle">Subtítulo da Apresentação</label>
+                </div>
+                <div class="input-field">
+                    <input id="presentation_date" type="text" class="validate" value="Setembro, 2023">
+                    <label for="presentation_date">Data da Apresentação</label>
+                </div>
+                <div class="col s12 l2" style="float: right">
+                    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+            <div class="col s12 col l3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 col l3"></div>
+            <div class="col s12 col l6" style="border: 1px solid gray; padding: 20px">
+                <h5>
+                    Apresentação - Página X de X
+                </h5>
+                <br></br>
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="input-field col s11">
+                    <textarea id="content-page" class="materialize-textarea"></textarea>
+                    <label for="content-page">Conteúdo</label>
+                </div>
+                <div class="col s1">
+                    <a class="btn-floating btn waves-effect waves-light green"><i class="material-icons">add</i></a>
+                </div>
+                <div class="col s12 l2" style="float: right">
+                    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+            <div class="col s12 col l3"></div>
+        </div>
+    </div>
+
+    <script>
+
+        var text = "\\documentclass{beamer}\n\n";
+        text += "\\mode<presentation>\n" +
+            "{\n" +
+            "  \\usetheme{Madrid}       % or try default, Darmstadt, Warsaw, ...\n" +
+            "  \\usecolortheme{default} % or try albatross, beaver, crane, ...\n" +
+            "  \\usefonttheme{serif}    % or try default, structurebold, ...\n" +
+            "  \\setbeamertemplate{navigation symbols}{}\n" +
+            "  \\setbeamertemplate{caption}[numbered]\n" +
+            "}\n\n";
+        text += "\\usepackage[english]{babel}\n" +
+            "\\usepackage[utf8x]{inputenc}\n" +
+            "\\usepackage{chemfig}\n" +
+            "\\usepackage[version=3]{mhchem}\n" +
+            "\n" +
+            "\\usepackage{pgfpages}\n" +
+            "\\pgfpagesuselayout{resize to}[%\n" +
+            "  physical paper width=8in, physical paper height=6in]\n" +
+            "\n" +
+            "\\title[TCC]{Presentation Test from Wilson's Tool}\n" +
+            "\\author[Fco Wilson R. Jr.]{Msc: Francisco Wilson Rodrigues Júnior}\n" +
+            "\\date{Ibiapina, 2023}\n";
+        text += "\\begin{document}\n" +
+            "\n" +
+            "\\begin{frame}\n" +
+            "\t\\begin{center}\n" +
+            "  \t\\includegraphics[width=3cm]{ufc.png}\n" +
+            "   \\end{center}\n" +
+            "  \\titlepage\n" +
+            "\\end{frame}\n" +
+            "\n" +
+            "\\begin{frame}{Sumário}\n" +
+            "  \\tableofcontents\n" +
+            "\\end{frame}\n" +
+            "\\end{document}";
+
+        console.log(text);
+
+        var generator = new latexjs.HtmlGenerator({ hyphenate: false })
+        generator = latexjs.parse(text, { generator: generator })
+
+        document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"))
+        document.body.appendChild(generator.domFragment())
+    </script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>
